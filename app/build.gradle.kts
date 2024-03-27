@@ -1,8 +1,15 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
     id("kotlin-kapt")
+}
+
+val apiKeyPropertiesFile: File = rootProject.file("apiKey.properties")
+val apiKeyProperties: Properties = Properties().apply {
+    load(apiKeyPropertiesFile.inputStream())
 }
 
 android {
@@ -15,6 +22,9 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+        buildConfigField("String", "API_KEY", "\"${apiKeyProperties["API_KEY"]}\"")
+        buildConfigField("String", "BASE_URL", "\"${apiKeyProperties["BASE_URL"]}\"")
+        buildConfigField("String", "BASE_URL_IMAGE", "\"${apiKeyProperties["BASE_URL_IMAGE"]}\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -40,6 +50,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildFeatures.buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"

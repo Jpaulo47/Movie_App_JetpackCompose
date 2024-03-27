@@ -1,6 +1,7 @@
 package com.joaorodrigues.movieapp_jetpackcompose
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +14,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.joaorodrigues.movieapp_jetpackcompose.ui.theme.MovieAppTheme
 
 class MainActivity : ComponentActivity() {
+
+    val apiKeyProperties = BuildConfig.API_KEY
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -25,6 +28,8 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
+        Toast.makeText(this, apiKeyProperties, Toast.LENGTH_LONG).show()
     }
 }
 
